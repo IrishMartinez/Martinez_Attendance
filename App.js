@@ -27,8 +27,8 @@ export default class App extends React.Component {
       const data = await response.json();
       this.setState({ users: data, loading: false });
     } catch (error) {
-      this.setState({ error: "Failed to load users", loading: false });
       console.error(error);
+      this.setState({ error: "Failed to load users", loading: false });
     }
   };
 
@@ -71,6 +71,7 @@ export default class App extends React.Component {
               <Text style={styles.tableHeaderText}>Status</Text>
             </View>
 
+            {/* Loading / Error / Data */}
             {loading && <ActivityIndicator size="large" color="#2980b9" />}
             {error && <Text style={{ color: "red", textAlign: "center" }}>{error}</Text>}
 
@@ -79,10 +80,14 @@ export default class App extends React.Component {
                 <Text style={styles.tableCell}>{user.lastname}</Text>
                 <Text style={styles.tableCell}>{user.firstname}</Text>
                 <Text style={styles.tableCell}>{user.section}</Text>
-                <Text style={[
-                  styles.tableCell, 
-                  user.status === "Present" ? styles.presentStatus : { color: "#e74c3c", fontWeight: "bold" }
-                ]}>
+                <Text
+                  style={[
+                    styles.tableCell,
+                    user.status === "Present"
+                      ? styles.presentStatus
+                      : { color: "#e74c3c", fontWeight: "bold" },
+                  ]}
+                >
                   {user.status}
                 </Text>
               </View>
